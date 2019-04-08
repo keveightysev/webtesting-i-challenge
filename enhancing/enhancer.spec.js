@@ -12,6 +12,12 @@ const testObject2 = {
   enhancement: 20,
 };
 
+const testObject3 = {
+  name: 'Kevin',
+  durability: 50,
+  enhancement: 0,
+};
+
 describe('enhancer.js', () => {
   describe('repair()', () => {
     it('should restore durability to 100', () => {
@@ -50,6 +56,16 @@ describe('enhancer.js', () => {
 
     it('should decrease enhancement by 1 if enhancement > 16', () => {
       expect(enhancer.fail(testObject2).enhancement).toBe(18);
+    });
+  });
+
+  describe('get()', () => {
+    it('should not modify name if enhancement is 0', () => {
+      expect(enhancer.get(testObject3).name).toBe('Kevin');
+    });
+
+    it('should add the enhancement to name if enhancement is more than 0', () => {
+      expect(enhancer.get(testObject).name).toBe('[+10] Kevin');
     });
   });
 });

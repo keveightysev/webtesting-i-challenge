@@ -25,9 +25,7 @@ describe('enhancer.js', () => {
 
   describe('succeed()', () => {
     it('should increase enhancement by 1', () => {
-      expect(enhancer.succeed(testObject).enhancement).toBe(
-        testObject.enhancement < 20 ? testObject.enhancement + 1 : 20,
-      );
+      expect(enhancer.succeed(testObject).enhancement).toBe(11);
     });
 
     it('should not increase if enhancement is already 20', () => {
@@ -38,6 +36,20 @@ describe('enhancer.js', () => {
       expect(enhancer.succeed(testObject).durability).toBe(
         testObject.durability,
       );
+    });
+  });
+
+  describe('fail()', () => {
+    it('should decrease durability by 5 if enhancement < 15', () => {
+      expect(enhancer.fail(testObject).durability).toBe(45);
+    });
+
+    it('should decrease durability by 10 if enhancement >= 15', () => {
+      expect(enhancer.fail(testObject2).durability).toBe(40);
+    });
+
+    it('should decrease enhancement by 1 if enhancement > 16', () => {
+      expect(enhancer.fail(testObject2).enhancement).toBe(18);
     });
   });
 });
